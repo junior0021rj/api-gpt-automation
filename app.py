@@ -7,6 +7,10 @@ app = Flask(__name__)
 def home():
     return jsonify({"status": "API ativa e funcionando no Render!"})
 
+@app.route('/healthz', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+
 @app.route('/processar-comando', methods=['POST'])
 def processar_comando():
     data = request.json
@@ -22,4 +26,3 @@ def processar_comando():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080)
- 
